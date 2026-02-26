@@ -53,3 +53,26 @@
 -   詳細ルール適用時は、該当ファイルを Read ツールで読み込んでから作業を開始すること
 -   テンプレート使用時は、該当テンプレートファイルの構成に従うこと
 -   ルールファイルの内容は、作業実行前に必ず最新版を読み込むこと
+
+## Agent Teams
+
+複数エージェントが協調して複雑なタスクを処理するチームテンプレートを利用できる。
+
+### 利用可能なチームテンプレート
+
+| チーム名 | 起動ワード例 | テンプレートファイル |
+|---|---|---|
+| 議論チーム | 「議論チームを作って」「〜について多角的に検討して」 | `claude-code-config/agent-teams/discussion-team.yaml` |
+| レビューチーム | 「レビューチームを作って」「このコードをレビューして」 | `claude-code-config/agent-teams/review-team.yaml` |
+| 開発チーム | 「開発チームを作って」「〜を実装して」 | `claude-code-config/agent-teams/development-team.yaml` |
+| 調査チーム | 「調査チームを作って」「〜を比較検討して」 | `claude-code-config/agent-teams/research-team.yaml` |
+| ドキュメントチーム | 「ドキュメントチームを作って」「〜のドキュメントを作成して」 | `claude-code-config/agent-teams/docs-team.yaml` |
+| リバースエンジニアリングチーム | 「既存コードを解析して」「設計資料を生成して」 | `claude-code-config/agent-teams/reverse-engineering-team.yaml` |
+| 意思決定支援チーム | 「議事録を分析して」「意思決定案を作って」 | `claude-code-config/agent-teams/decision-support-team.yaml` |
+
+### チーム起動時の共通ルール
+
+1. **ファイルオーナーシップを最初に定義すること** - 同じファイルを複数エージェントが編集するとコンフリクトが発生する
+2. **delegate_mode を活用すること** - `delegate_mode: true` のエージェントは調整のみに専念し実装しない
+3. **依存関係（depends_on）を守ること** - 後続エージェントは前工程の完了後に起動する
+4. **出力フォーマットを指定すること** - 各テンプレートの `output_format` セクションの形式で最終アウトプットを作成する
