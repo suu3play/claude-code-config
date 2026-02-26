@@ -53,7 +53,7 @@ members:
   - name: test-agent
     role: テストエージェント
     depends_on: [backend-agent, frontend-agent]
-    file_ownership: [tests/, __tests__/, *.spec.ts, *.test.ts]
+    file_ownership: ["tests/", "__tests__/", "*.spec.ts", "*.test.ts"]
     spawn_prompt: |
       あなたはテストエージェントです。
       担当ディレクトリ: tests/, __tests__/, *.spec.ts, *.test.ts
