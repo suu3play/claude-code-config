@@ -1,7 +1,7 @@
 team_name: discussion-team
 description: >
   問題に対して多角的な視点から解を導き出す議論チーム。
-  現実・理想・折衷・クリエイティブの4エージェントが独立して提案し、
+  現実・理想・折衷の3エージェントが独立して提案し、
   モデレーターが統合・サマリーを作成する。
 
 lead:
@@ -45,20 +45,11 @@ members:
       フェーズ分けや優先度付けを活用して「今できる最善」を提案すること。
       トレードオフを明示し、意思決定者が選びやすい形で提示すること。
 
-  - name: creative-agent
-    role: クリエイティブエージェント
-    spawn_prompt: |
-      あなたはクリエイティブエージェントです。
-      与えられた問題に対して「誰も思いつかないような斜め上の解」を提案してください。
-      観点：既成概念の打破・異業種からの類推・逆転の発想・実験的アプローチ。
-      突飛でも構わない。ただし問題の本質を外さないこと。
-      他エージェントの意見を聞いた上で、それらを組み合わせた第5の案も歓迎。
-
 workflow:
   phases:
     - phase: 1-independent-proposals
       description: 全エージェント（折衷案以外）が独立して提案を作成
-      parallel: [realistic-agent, ideal-agent, creative-agent]
+      parallel: [realistic-agent, ideal-agent]
 
     - phase: 2-compromise-synthesis
       description: 折衷案エージェントが現実案・理想案を受けて統合案を作成
@@ -66,7 +57,7 @@ workflow:
 
     - phase: 3-cross-review
       description: 各エージェントが他エージェントの提案にフィードバック
-      parallel: [realistic-agent, ideal-agent, creative-agent, compromise-agent]
+      parallel: [realistic-agent, ideal-agent, compromise-agent]
 
     - phase: 4-moderation
       description: モデレーターが全提案を統合し最終サマリーを作成
